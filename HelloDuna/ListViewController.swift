@@ -13,8 +13,16 @@ class ListViewController: UIViewController {
         let view = UIView()
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.darkGray.cgColor
+        view.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(itemViewTapHandler))
+        view.addGestureRecognizer(tapGesture)
         return view
     }()
+    @objc private func itemViewTapHandler(_ sender: Any) {
+        let mainVC = MainViewController()
+        mainVC.modalPresentationStyle = .fullScreen
+        present(mainVC, animated: true)
+    }
     
     private lazy var profileImageView: UIImageView = {
         let image = UIImage(named: ImageLiteral.profileImage)

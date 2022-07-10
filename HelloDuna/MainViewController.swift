@@ -36,8 +36,12 @@ class MainViewController: UIViewController {
         let button = UIButton()
         let buttonImage = UIImage(named: ImageLiteral.profileCloseImage)
         button.setImage(buttonImage, for: .normal)
+        button.addTarget(self, action: #selector(closedButtonTapHandler), for: .touchUpInside)
         return button
     }()
+    @objc private func closedButtonTapHandler(sender: UIButton) {
+        self.dismiss(animated: true)
+    }
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
