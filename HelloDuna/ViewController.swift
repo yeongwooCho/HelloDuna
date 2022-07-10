@@ -25,22 +25,22 @@ class ViewController: UIViewController {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "듀나"
+        label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 22.0, weight: .medium)
-        label.textColor = .white
         return label
     }()
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "⛴포항항"
+        label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-        label.textColor = .white
         return label
     }()
     
     private lazy var dividerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.3)
+        view.backgroundColor = ColorStyle.dividerColor.color
         return view
     }()
     
@@ -65,6 +65,7 @@ class ViewController: UIViewController {
     private lazy var chatLabel: UILabel = {
         let label = UILabel()
         label.text = "나와의 채팅"
+        label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 0, weight: .medium)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -83,6 +84,7 @@ class ViewController: UIViewController {
     private lazy var editLabel: UILabel = {
         let label = UILabel()
         label.text = "프로필 편집"
+        label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 0, weight: .medium)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -101,6 +103,7 @@ class ViewController: UIViewController {
     private lazy var storyLabel: UILabel = {
         let label = UILabel()
         label.text = "카카오스토리"
+        label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 0, weight: .medium)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -122,7 +125,7 @@ class ViewController: UIViewController {
     private func configureView() {
         guard let view = self.view else { return }
         
-        view.backgroundColor = UIColor(red: 0.53725490200000003, green: 0.56470588239999997, blue: 0.59215686270000001, alpha: 1)
+        view.backgroundColor = ColorStyle.backgroundColor.color
     }
     
     private func configureAddSubViews() {

@@ -12,6 +12,7 @@
 		43C20A5C28781A0B00928584 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C20A5B28781A0B00928584 /* ViewController.swift */; };
 		43C20A6128781A0E00928584 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43C20A6028781A0E00928584 /* Assets.xcassets */; };
 		43C20A6428781A0E00928584 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43C20A6228781A0E00928584 /* LaunchScreen.storyboard */; };
+		43D30749287AA8290033823D /* ColorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D30748287AA8290033823D /* ColorStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		43C20A6028781A0E00928584 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43C20A6328781A0E00928584 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43C20A6528781A0E00928584 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43D30748287AA8290033823D /* ColorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				43C20A5728781A0B00928584 /* AppDelegate.swift */,
 				43C20A5928781A0B00928584 /* SceneDelegate.swift */,
 				43C20A5B28781A0B00928584 /* ViewController.swift */,
+				43D30748287AA8290033823D /* ColorStyle.swift */,
 				43C20A6028781A0E00928584 /* Assets.xcassets */,
 				43C20A6228781A0E00928584 /* LaunchScreen.storyboard */,
 				43C20A6528781A0E00928584 /* Info.plist */,
@@ -137,6 +140,7 @@
 				43C20A5C28781A0B00928584 /* ViewController.swift in Sources */,
 				43C20A5828781A0B00928584 /* AppDelegate.swift in Sources */,
 				43C20A5A28781A0B00928584 /* SceneDelegate.swift in Sources */,
+				43D30749287AA8290033823D /* ColorStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
