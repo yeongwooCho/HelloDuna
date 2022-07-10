@@ -11,14 +11,14 @@ class ViewController: UIViewController {
     
     private lazy var closedButton: UIButton = {
         let button = UIButton()
-        let buttonImage = UIImage(named: "profileCloseBtn")
+        let buttonImage = UIImage(named: ImageLiteral.profileCloseImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
     
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile")
+        imageView.image = UIImage(named: ImageLiteral.profileImage)
         return imageView
     }()
     
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     }()
     private lazy var chatButton: UIButton = {
         let button = UIButton()
-        let buttonImage = UIImage(named: "profileTalkImg")
+        let buttonImage = UIImage(named: ImageLiteral.profileTalkImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
     }()
     private lazy var editButton: UIButton = {
         let button = UIButton()
-        let buttonImage = UIImage(named: "profileEditImg")
+        let buttonImage = UIImage(named: ImageLiteral.profileEditImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     }()
     private lazy var storyButton: UIButton = {
         let button = UIButton()
-        let buttonImage = UIImage(named: "profileStoryImg")
+        let buttonImage = UIImage(named: ImageLiteral.profileStoryImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
