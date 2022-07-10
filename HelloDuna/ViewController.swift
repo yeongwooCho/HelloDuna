@@ -9,6 +9,29 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    enum TextLabel {
+        case name
+        case description
+        case chat
+        case edit
+        case story
+
+        func text() -> String {
+            switch self {
+            case .name:
+                return "듀나"
+            case .description:
+                return "⛴포항항"
+            case .chat:
+                return "나와의 채팅"
+            case .edit:
+                return "프로필 편집"
+            case .story:
+                return "카카오스토리"
+            }
+        }
+    }
+    
     private lazy var closedButton: UIButton = {
         let button = UIButton()
         let buttonImage = UIImage(named: ImageLiteral.profileCloseImage)
@@ -24,7 +47,7 @@ class ViewController: UIViewController {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "듀나"
+        label.text = TextLabel.name.text()
         label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 22.0, weight: .medium)
         return label
@@ -32,7 +55,7 @@ class ViewController: UIViewController {
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "⛴포항항"
+        label.text = TextLabel.description.text()
         label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
         return label
@@ -64,7 +87,7 @@ class ViewController: UIViewController {
     }()
     private lazy var chatLabel: UILabel = {
         let label = UILabel()
-        label.text = "나와의 채팅"
+        label.text = TextLabel.chat.text()
         label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 0, weight: .medium)
         label.adjustsFontSizeToFitWidth = true
@@ -83,7 +106,7 @@ class ViewController: UIViewController {
     }()
     private lazy var editLabel: UILabel = {
         let label = UILabel()
-        label.text = "프로필 편집"
+        label.text = TextLabel.edit.text()
         label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 0, weight: .medium)
         label.adjustsFontSizeToFitWidth = true
@@ -102,7 +125,7 @@ class ViewController: UIViewController {
     }()
     private lazy var storyLabel: UILabel = {
         let label = UILabel()
-        label.text = "카카오스토리"
+        label.text = TextLabel.story.text()
         label.textColor = ColorStyle.textColor.color
         label.font = UIFont.systemFont(ofSize: 0, weight: .medium)
         label.adjustsFontSizeToFitWidth = true
