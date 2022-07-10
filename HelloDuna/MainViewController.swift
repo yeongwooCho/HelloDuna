@@ -32,6 +32,29 @@ class MainViewController: UIViewController {
         }
     }
     
+    let maxDimmedAlpha: CGFloat = 0.6
+    
+    // Constants
+    let defaultHeight: CGFloat = UIScreen.main.bounds.height
+    let dismissibleHeight: CGFloat = UIScreen.main.bounds.height / 2
+    var currentContainerHeight: CGFloat = UIScreen.main.bounds.height
+    
+    // Dynamic container constraint
+    var containerViewHeightConstraint: NSLayoutConstraint?
+    var containerViewBottomConstraint: NSLayoutConstraint?
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = ColorStyle.backgroundColor.color
+        return view
+    }()
+    
+    lazy var dimmedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     private lazy var closedButton: UIButton = {
         let button = UIButton()
         let buttonImage = UIImage(named: ImageLiteral.profileCloseImage)
@@ -83,12 +106,14 @@ class MainViewController: UIViewController {
         let view = UIView()
         return view
     }()
+    
     private lazy var chatButton: UIButton = {
         let button = UIButton()
         let buttonImage = UIImage(named: ImageLiteral.profileTalkImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
+    
     private lazy var chatLabel: UILabel = {
         let label = UILabel()
         label.text = TextLabel.chat.text()
@@ -102,12 +127,14 @@ class MainViewController: UIViewController {
         let view = UIView()
         return view
     }()
+    
     private lazy var editButton: UIButton = {
         let button = UIButton()
         let buttonImage = UIImage(named: ImageLiteral.profileEditImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
+    
     private lazy var editLabel: UILabel = {
         let label = UILabel()
         label.text = TextLabel.edit.text()
@@ -121,12 +148,14 @@ class MainViewController: UIViewController {
         let view = UIView()
         return view
     }()
+    
     private lazy var storyButton: UIButton = {
         let button = UIButton()
         let buttonImage = UIImage(named: ImageLiteral.profileStoryImage)
         button.setImage(buttonImage, for: .normal)
         return button
     }()
+    
     private lazy var storyLabel: UILabel = {
         let label = UILabel()
         label.text = TextLabel.story.text()
@@ -147,24 +176,34 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupPanGesture()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.animatePresentContainer()
     }
     
     private func configureView() {
         guard let view = self.view else { return }
         
-        view.backgroundColor = ColorStyle.backgroundColor.color
+        view.backgroundColor = .clear
     }
     
     private func configureAddSubViews() {
         guard let view = self.view else { return }
         
-        view.addSubview(closedButton)
-        view.addSubview(profileImageView)
-        view.addSubview(nameLabel)
-        view.addSubview(descriptionLabel)
-        view.addSubview(dividerView)
+        view.addSubview(dimmedView)
+        view.addSubview(containerView)
         
-        view.addSubview(contentStackView)
+        containerView.addSubview(closedButton)
+        containerView.addSubview(profileImageView)
+        containerView.addSubview(nameLabel)
+        containerView.addSubview(descriptionLabel)
+        containerView.addSubview(dividerView)
+        containerView.addSubview(contentStackView)
+        
         chatView.addSubview(chatButton)
         chatView.addSubview(chatLabel)
         editView.addSubview(editButton)
@@ -176,15 +215,37 @@ class MainViewController: UIViewController {
     private func configureConstraints() {
         guard let view = self.view else { return }
         
+        dimmedView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        
+        containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
+        containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: defaultHeight)
+        containerViewHeightConstraint?.isActive = true
+        containerViewBottomConstraint?.isActive = true
+        
         closedButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            closedButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            closedButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            closedButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 44),
+            closedButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            closedButton.widthAnchor.constraint(equalToConstant: 44),
+            closedButton.heightAnchor.constraint(equalToConstant: 44),
         ])
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profileImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            profileImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 483),
+            profileImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
             profileImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
@@ -204,18 +265,17 @@ class MainViewController: UIViewController {
         dividerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dividerView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 27),
-            dividerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            dividerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            dividerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            dividerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             dividerView.heightAnchor.constraint(equalToConstant: 1)
         ])
         
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            contentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            contentStackView.heightAnchor.constraint(equalToConstant: 108)
+            contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            contentStackView.heightAnchor.constraint(equalToConstant: 142)
         ])
         
         chatButton.translatesAutoresizingMaskIntoConstraints = false
@@ -265,6 +325,74 @@ class MainViewController: UIViewController {
             storyLabel.trailingAnchor
                 .constraint(equalTo: storyButton.trailingAnchor)
         ])
+    }
+    
+}
+
+// MARK: Gesture & Animate
+extension MainViewController {
+    
+    private func setupPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(gesture:)))
+        panGesture.delaysTouchesBegan = false
+        panGesture.delaysTouchesEnded = false
+        view.addGestureRecognizer(panGesture)
+    }
+    @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        
+        let isDraggingDown = translation.y > 0
+        
+        let newHeight = currentContainerHeight - translation.y
+        
+        switch gesture.state {
+        case .changed:
+            containerViewHeightConstraint?.constant = newHeight
+            view.layoutIfNeeded()
+            
+        case .ended:
+            if newHeight < dismissibleHeight {
+                self.animateDismissView()
+            }
+            else if newHeight < defaultHeight {
+                self.animateContainerHeight(defaultHeight)
+            }
+            else if newHeight > defaultHeight && !isDraggingDown {
+                self.animateContainerHeight(defaultHeight)
+            }
+        default:
+            break
+        }
+    }
+    
+    private func animateContainerHeight(_ height: CGFloat) {
+        UIView.animate(withDuration: 0.4) {
+            self.containerViewHeightConstraint?.constant = height
+            self.view.layoutIfNeeded()
+        }
+        currentContainerHeight = height
+    }
+    
+    // MARK: Present and dismiss animation
+    private func animatePresentContainer() {
+        UIView.animate(withDuration: 0.3) {
+            self.containerViewBottomConstraint?.constant = 0
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func animateDismissView() {
+        dimmedView.alpha = maxDimmedAlpha
+        UIView.animate(withDuration: 0.4) {
+            self.dimmedView.alpha = 0
+        } completion: { _ in
+            self.dismiss(animated: false)
+        }
+
+        UIView.animate(withDuration: 0.3) {
+            self.containerViewBottomConstraint?.constant = self.defaultHeight
+            self.view.layoutIfNeeded()
+        }
     }
     
 }

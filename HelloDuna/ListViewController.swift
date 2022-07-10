@@ -20,7 +20,7 @@ class ListViewController: UIViewController {
     }()
     @objc private func itemViewTapHandler(_ sender: Any) {
         let mainVC = MainViewController()
-        mainVC.modalPresentationStyle = .fullScreen
+        mainVC.modalPresentationStyle = .overFullScreen
         present(mainVC, animated: true)
     }
     
