@@ -218,11 +218,6 @@ class MainViewController: UIViewController {
             contentStackView.heightAnchor.constraint(equalToConstant: 108)
         ])
         
-        chatView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            chatView.widthAnchor.constraint(equalToConstant: 44),
-            chatView.heightAnchor.constraint(equalToConstant: 44)
-        ])
         chatButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             chatButton.centerXAnchor.constraint(equalTo: chatView.centerXAnchor),
@@ -230,6 +225,7 @@ class MainViewController: UIViewController {
             chatButton.widthAnchor.constraint(equalToConstant: 44),
             chatButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+        
         chatLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             chatLabel.topAnchor.constraint(equalTo: chatButton.bottomAnchor),
@@ -238,11 +234,6 @@ class MainViewController: UIViewController {
                 .constraint(equalTo: chatButton.trailingAnchor)
         ])
         
-        editView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            editView.widthAnchor.constraint(equalToConstant: 44),
-            editView.heightAnchor.constraint(equalToConstant: 44)
-        ])
         editButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             editButton.centerXAnchor.constraint(equalTo: editView.centerXAnchor),
@@ -250,6 +241,7 @@ class MainViewController: UIViewController {
             editButton.widthAnchor.constraint(equalToConstant: 44),
             editButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+        
         editLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             editLabel.topAnchor.constraint(equalTo: editButton.bottomAnchor),
@@ -258,11 +250,6 @@ class MainViewController: UIViewController {
                 .constraint(equalTo: editButton.trailingAnchor)
         ])
         
-        storyView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            storyView.widthAnchor.constraint(equalToConstant: 44),
-            storyView.heightAnchor.constraint(equalToConstant: 44)
-        ])
         storyButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             storyButton.centerXAnchor.constraint(equalTo: storyView.centerXAnchor),
@@ -270,6 +257,7 @@ class MainViewController: UIViewController {
             storyButton.widthAnchor.constraint(equalToConstant: 44),
             storyButton.heightAnchor.constraint(equalToConstant: 44)
         ])
+        
         storyLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             storyLabel.topAnchor.constraint(equalTo: storyButton.bottomAnchor),
