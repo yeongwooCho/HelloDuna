@@ -32,8 +32,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    let maxDimmedAlpha: CGFloat = 0.6
-    
     // Constants
     let defaultHeight: CGFloat = UIScreen.main.bounds.height
     let dismissibleHeight: CGFloat = UIScreen.main.bounds.height / 2
@@ -46,12 +44,6 @@ class MainViewController: UIViewController {
     lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorStyle.backgroundColor.color
-        return view
-    }()
-    
-    lazy var dimmedView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
         return view
     }()
     
@@ -194,7 +186,6 @@ class MainViewController: UIViewController {
     private func configureAddSubViews() {
         guard let view = self.view else { return }
         
-        view.addSubview(dimmedView)
         view.addSubview(containerView)
         
         containerView.addSubview(closedButton)
@@ -214,14 +205,6 @@ class MainViewController: UIViewController {
     
     private func configureConstraints() {
         guard let view = self.view else { return }
-        
-        dimmedView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
-            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -244,7 +227,7 @@ class MainViewController: UIViewController {
         
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 483),
+            profileImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: UIScreen.main.bounds.height - 329),
             profileImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
             profileImageView.heightAnchor.constraint(equalToConstant: 100)
@@ -275,7 +258,7 @@ class MainViewController: UIViewController {
             contentStackView.topAnchor.constraint(equalTo: dividerView.bottomAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            contentStackView.heightAnchor.constraint(equalToConstant: 142)
+            contentStackView.heightAnchor.constraint(equalToConstant: 108)
         ])
         
         chatButton.translatesAutoresizingMaskIntoConstraints = false
@@ -365,6 +348,15 @@ extension MainViewController {
         }
     }
     
+    private func animateDismissView() {
+        UIView.animate(withDuration: 0.3) {
+            self.containerViewBottomConstraint?.constant = self.defaultHeight
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.dismiss(animated: false)
+        }
+    }
+    
     private func animateContainerHeight(_ height: CGFloat) {
         UIView.animate(withDuration: 0.4) {
             self.containerViewHeightConstraint?.constant = height
@@ -377,20 +369,6 @@ extension MainViewController {
     private func animatePresentContainer() {
         UIView.animate(withDuration: 0.3) {
             self.containerViewBottomConstraint?.constant = 0
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    private func animateDismissView() {
-        dimmedView.alpha = maxDimmedAlpha
-        UIView.animate(withDuration: 0.4) {
-            self.dimmedView.alpha = 0
-        } completion: { _ in
-            self.dismiss(animated: false)
-        }
-
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = self.defaultHeight
             self.view.layoutIfNeeded()
         }
     }
