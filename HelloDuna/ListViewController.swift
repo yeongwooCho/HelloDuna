@@ -44,11 +44,6 @@ class ListViewController: UIViewController {
         configureConstraints()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     private func configureView() {
         guard let view = self.view else { return }
         

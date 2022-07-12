@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43100139287DA8780057989B /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43100138287DA8780057989B /* CustomTabBarController.swift */; };
 		43C20A5828781A0B00928584 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C20A5728781A0B00928584 /* AppDelegate.swift */; };
 		43C20A5A28781A0B00928584 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C20A5928781A0B00928584 /* SceneDelegate.swift */; };
 		43C20A5C28781A0B00928584 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C20A5B28781A0B00928584 /* MainViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43100138287DA8780057989B /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		43C20A5428781A0B00928584 /* HelloDuna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloDuna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43C20A5728781A0B00928584 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43C20A5928781A0B00928584 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,8 +64,9 @@
 			children = (
 				43C20A5728781A0B00928584 /* AppDelegate.swift */,
 				43C20A5928781A0B00928584 /* SceneDelegate.swift */,
-				43C20A5B28781A0B00928584 /* MainViewController.swift */,
+				43100138287DA8780057989B /* CustomTabBarController.swift */,
 				43D3074C287AAC730033823D /* ListViewController.swift */,
+				43C20A5B28781A0B00928584 /* MainViewController.swift */,
 				43D30748287AA8290033823D /* ColorStyle.swift */,
 				43D3074A287AA9E50033823D /* ImageLiteral.swift */,
 				43C20A6028781A0E00928584 /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43C20A5C28781A0B00928584 /* MainViewController.swift in Sources */,
+				43100139287DA8780057989B /* CustomTabBarController.swift in Sources */,
 				43C20A5828781A0B00928584 /* AppDelegate.swift in Sources */,
 				43D3074D287AAC730033823D /* ListViewController.swift in Sources */,
 				43C20A5A28781A0B00928584 /* SceneDelegate.swift in Sources */,
